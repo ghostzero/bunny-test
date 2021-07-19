@@ -1,0 +1,16 @@
+name: Build and Deploy
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: bunny-deploy
+        uses: ghostzero/bunny-action@main
+        env:
+          BUNNY_STORAGE_HOSTNAME: storage.bunnycdn.com
+          BUNNY_STORAGE_USERNAME: bunny-app
+          BUNNY_PULL_ZONE_ID: 464290
+        with:
+          args: deploy --dir=dist
